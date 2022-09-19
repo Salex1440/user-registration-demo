@@ -1,12 +1,17 @@
 package com.example.userregistrationdemo.controller;
 
 import com.example.userregistrationdemo.dto.UserDto;
+import com.example.userregistrationdemo.entity.User;
+import com.example.userregistrationdemo.exception.UserAlreadyExistsException;
+import com.example.userregistrationdemo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +20,9 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
+
+    @Autowired
+    UserService userService;
 
     @GetMapping(path = "/user/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
@@ -28,7 +36,20 @@ public class RegistrationController {
             @ModelAttribute("user") @Valid UserDto userDto,
             HttpServletRequest request,
             Errors errors) {
-        return null;
+        try {
+            User registered = userService.registerNewAccount(userDto);
+        } catch (UserAlreadyExistsException uaeEx) {
+            ModelAndView mav = new ModelAndView();
+            mav.addObject("message", "An account for that username/email already exists.");
+            return mav;
+        }
+        return new ModelAndView("successRegister", "user", userDto);
+    }
+
+    @GetMapping(path = "/error")
+    @ResponseBody
+    public String showError(Error error) {
+        return error.getMessage();
     }
 
 }
