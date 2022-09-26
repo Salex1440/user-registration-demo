@@ -24,18 +24,20 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    @GetMapping(path = "/user/registration")
+    @GetMapping(path = "/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
+        System.out.println("GET registration");
         UserDto userDto = new UserDto();
-        model.addAttribute("user", userDto);
+        model.addAttribute("userDto", userDto);
         return "registration";
     }
 
-    @PostMapping(path = "/user/registration")
+    @PostMapping(path = "/registration")
     public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Valid UserDto userDto,
+            @ModelAttribute("userDto") @Valid UserDto userDto,
             HttpServletRequest request,
             Errors errors) {
+        System.out.println("POST registration");
         try {
             User registered = userService.registerNewAccount(userDto);
         } catch (UserAlreadyExistsException uaeEx) {
