@@ -1,7 +1,8 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
-<h1 th:text="form">form</h1>
-<form action="/" th:object="${userDto}" method="POST" enctype="utf8">
+<form action="/registration"
+      th:object="${userDto}"
+      method="POST">
     <div>
         <label th:text="firstName">first</label>
         <input th:field="*{firstName}"/>
