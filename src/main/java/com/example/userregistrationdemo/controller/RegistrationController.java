@@ -40,7 +40,7 @@ public class RegistrationController {
             Errors errors) {
         System.out.println("POST registration");
         if (result.hasErrors()) {
-            return new ModelAndView("registration");
+            return new ModelAndView("registration", "errors", errors.getAllErrors());
         }
         try {
             User registered = userService.registerNewAccount(userDto);

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@PasswordMatches(message = "Passwords don't matches!")
+@PasswordMatches(message = "Passwords don't match!")
 public class UserDto {
     @NotEmpty(message = "Nickname cannot be empty.")
     private String nickname;
