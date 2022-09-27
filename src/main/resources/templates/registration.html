@@ -33,6 +33,6 @@
 </form>
 <p th:if="${message}" th:text = "${message}">message</p>
 <p th:if="${errors}" th:each = "err: ${errors}" th:text="${err.defaultMessage}">errors</p>
-<a th:href="@{/login.html}" th:text="loginLink">login</a>
+<a th:href="@{/login}" th:text="loginLink">login</a>
 </body>
 </html>

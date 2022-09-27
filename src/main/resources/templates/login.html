@@ -2,7 +2,7 @@
 <body>
 <form action="#"
       th:action="@{/login}"
-      th:object="${userDto}"
+      th:object="${user}"
       method="POST">
     <div>
         <label th:text="nickname">nickname</label>
@@ -18,9 +18,9 @@
            th:each="err: ${#fields.errors('password')}"
            th:text="${err}">Validation error</p>
     </div>
-    <button type="submit" th:text="sign in">sign in</button>
+    <button type="submit" th:text="'sign in'">sign in</button>
 </form>
 <p th:if="${errors}" th:each = "err: ${errors}" th:text="${err.defaultMessage}">errors</p>
-<a th:href="@{/register.html}" th:text="registration">registration</a>
+<a th:href="@{/registration}" th:text="registration">registration</a>
 </body>
 </html>
