@@ -5,17 +5,10 @@
       th:object="${userDto}"
       method="POST">
     <div>
-        <label th:text="firstName">first</label>
-        <input type="text" th:field="*{firstName}"/>
-        <p th:if="${#fields.hasErrors('firstName')}"
-           th:each="err: ${#fields.errors('firstName')}"
-           th:text="${err}">Validation error</p>
-    </div>
-    <div>
-        <label th:text="lastName">last</label>
-        <input type="text" th:field="*{lastName}"/>
-        <p th:if="${#fields.hasErrors('lastName')}"
-           th:each="err: ${#fields.errors('lastName')}"
+        <label th:text="nickname">first</label>
+        <input type="text" th:field="*{nickname}"/>
+        <p th:if="${#fields.hasErrors('nickname')}"
+           th:each="err: ${#fields.errors('nickname')}"
            th:text="${err}">Validation error</p>
     </div>
     <div>
