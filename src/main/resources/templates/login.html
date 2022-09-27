@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 <form action="#"
-      th:action="@{/registration}"
+      th:action="@{/login}"
       th:object="${userDto}"
       method="POST">
     <div>
@@ -12,27 +12,15 @@
            th:text="${err}">Validation error</p>
     </div>
     <div>
-        <label th:text="email">email</label>
-        <input type="text" th:field="*{email}"/>
-        <p th:if="${#fields.hasErrors('email')}"
-           th:each="err: ${#fields.errors('email')}"
-           th:text="${err}">Validation error</p>
-    </div>
-    <div>
         <label th:text="password">password</label>
         <input type="password" th:field="*{password}"/>
         <p th:if="${#fields.hasErrors('password')}"
            th:each="err: ${#fields.errors('password')}"
            th:text="${err}">Validation error</p>
     </div>
-    <div>
-        <label th:text="confirmPass">confirm</label>
-        <input type="password" th:field="*{matchingPassword}"/>
-    </div>
-    <button type="submit" th:text="submit">submit</button>
+    <button type="submit" th:text="sign in">sign in</button>
 </form>
-<p th:if="${message}" th:text = "${message}">message</p>
 <p th:if="${errors}" th:each = "err: ${errors}" th:text="${err.defaultMessage}">errors</p>
-<a th:href="@{/login.html}" th:text="loginLink">login</a>
+<a th:href="@{/register.html}" th:text="registration">registration</a>
 </body>
 </html>
