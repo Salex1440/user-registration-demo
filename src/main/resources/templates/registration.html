@@ -6,27 +6,31 @@
       method="POST">
     <div>
         <label th:text="firstName">first</label>
-        <input th:field="*{firstName}"/>
-        <p th:each="error: ${#fields.errors('firstName')}"
-           th:text="${error}">Validation error</p>
+        <input type="text" th:field="*{firstName}"/>
+        <p th:if="${#fields.hasErrors('firstName')}"
+           th:each="err: ${#fields.errors('firstName')}"
+           th:text="${err}">Validation error</p>
     </div>
     <div>
         <label th:text="lastName">last</label>
-        <input th:field="*{lastName}"/>
-        <p th:each="error : ${#fields.errors('lastName')}"
-           th:text="${error}">Validation error</p>
+        <input type="text" th:field="*{lastName}"/>
+        <p th:if="${#fields.hasErrors('lastName')}"
+           th:each="err: ${#fields.errors('lastName')}"
+           th:text="${err}">Validation error</p>
     </div>
     <div>
         <label th:text="email">email</label>
-        <input type="email" th:field="*{email}"/>
-        <p th:each="error : ${#fields.errors('email')}"
-           th:text="${error}">Validation error</p>
+        <input type="text" th:field="*{email}"/>
+        <p th:if="${#fields.hasErrors('email')}"
+           th:each="err: ${#fields.errors('email')}"
+           th:text="${err}">Validation error</p>
     </div>
     <div>
         <label th:text="password">password</label>
         <input type="password" th:field="*{password}"/>
-        <p th:each="error : ${#fields.errors('password')}"
-           th:text="${error}">Validation error</p>
+        <p th:if="${#fields.hasErrors('password')}"
+           th:each="err: ${#fields.errors('email')}"
+           th:text="${err}">Validation error</p>
     </div>
     <div>
         <label th:text="confirmPass">confirm</label>

@@ -7,11 +7,11 @@ import com.example.userregistrationdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,19 +33,24 @@ public class RegistrationController {
     }
 
     @PostMapping(path = "/registration")
-    public ModelAndView registerUserAccount(
+    public String registerUserAccount(
             @ModelAttribute("userDto") @Valid UserDto userDto,
+            BindingResult result,
             HttpServletRequest request,
             Errors errors) {
         System.out.println("POST registration");
+        if (result.hasErrors()) {
+            return "registration";
+        }
         try {
             User registered = userService.registerNewAccount(userDto);
         } catch (UserAlreadyExistsException uaeEx) {
             ModelAndView mav = new ModelAndView();
             mav.addObject("message", "An account for that username/email already exists.");
-            return mav;
+            return "registration";
         }
-        return new ModelAndView("successRegister", "userDto", userDto);
+        return "registration";
+//        return new ModelAndView("successRegister", "userDto", userDto);
     }
 
 }

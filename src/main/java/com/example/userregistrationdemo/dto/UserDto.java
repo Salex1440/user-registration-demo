@@ -10,25 +10,21 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@PasswordMatches
+@PasswordMatches(message = "Passwords don't matches!")
 public class UserDto {
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "User's name cannot be empty.")
     private String firstName;
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "User's name cannot be empty.")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Password cannot be empty!")
     private String password;
 
     private String matchingPassword;
 
-    @NotNull
-    @NotEmpty
-//    @ValidEmail
+    @NotEmpty(message = "Email cannot be empty!")
+    @ValidEmail(message = "Invalid email!")
     private String email;
 
 }
