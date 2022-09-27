@@ -33,24 +33,23 @@ public class RegistrationController {
     }
 
     @PostMapping(path = "/registration")
-    public String registerUserAccount(
+    public ModelAndView registerUserAccount(
             @ModelAttribute("userDto") @Valid UserDto userDto,
             BindingResult result,
             HttpServletRequest request,
             Errors errors) {
         System.out.println("POST registration");
         if (result.hasErrors()) {
-            return "registration";
+            return new ModelAndView("registration");
         }
         try {
             User registered = userService.registerNewAccount(userDto);
         } catch (UserAlreadyExistsException uaeEx) {
-            ModelAndView mav = new ModelAndView();
+            ModelAndView mav = new ModelAndView("registration");
             mav.addObject("message", "An account for that username/email already exists.");
-            return "registration";
+            return mav;
         }
-        return "registration";
-//        return new ModelAndView("successRegister", "userDto", userDto);
+        return new ModelAndView("registration", "userDto", userDto);
     }
 
 }
