@@ -29,4 +29,8 @@ public class UserService {
         return userRepository.findByEmail(email) != null;
     }
 
+    public User findUserByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
+    }
+
 }

@@ -9,4 +9,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.email = :email")
     public User findByEmail(@NonNull String email);
+
+    @Query("SELECT u FROM User u WHERE u.nickname = :nickname")
+    public User findByNickname(@NonNull String nickname);
+
 }
