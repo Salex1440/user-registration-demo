@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 public class LoginController {
 
@@ -29,9 +31,10 @@ public class LoginController {
     }
 
     @PostMapping(path = "/login")
-    public ModelAndView signIn(@ModelAttribute("user") User input,
+    public ModelAndView signIn(@ModelAttribute("user") @Valid User input,
                                BindingResult result,
                                Errors errors) {
+        System.out.println("POST login");
         if (result.hasErrors()) {
             return new ModelAndView("login", "errors", errors.getAllErrors());
         }
