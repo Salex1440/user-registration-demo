@@ -29,22 +29,4 @@ public class LoginController {
         model.addAttribute("user", user);
         return "login";
     }
-
-    @PostMapping(path = "/login")
-    public ModelAndView signIn(@ModelAttribute("user") @Valid User input,
-                               BindingResult result,
-                               Errors errors) {
-        System.out.println("POST login");
-        if (result.hasErrors()) {
-            return new ModelAndView("login", "errors", errors.getAllErrors());
-        }
-        User user = userService.findUserByNickname(input.getNickname());
-        if (user == null) {
-            return new ModelAndView("login", "message", "User with such nickname doesn't exist!");
-        }
-        if (!input.getPassword().equals(user.getPassword())) {
-            return new ModelAndView("login", "message", "Wrong password!");
-        }
-        return new ModelAndView("home", "user", user);
-    }
 }

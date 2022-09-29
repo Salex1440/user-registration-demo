@@ -1,24 +1,15 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
-<form action="#"
-      th:action="@{/login}"
-      th:object="${user}"
-      method="POST">
+<form th:action="@{/login}" method="POST">
     <div>
         <label th:text="nickname">nickname</label>
-        <input type="text" th:field="*{nickname}"/>
-        <p th:if="${#fields.hasErrors('nickname')}"
-           th:each="err: ${#fields.errors('nickname')}"
-           th:text="${err}">Validation error</p>
+        <input type="text" id="username" name="username"/>
     </div>
     <div>
         <label th:text="password">password</label>
-        <input type="password" th:field="*{password}"/>
-        <p th:if="${#fields.hasErrors('password')}"
-           th:each="err: ${#fields.errors('password')}"
-           th:text="${err}">Validation error</p>
+        <input type="password" id="password" name="password"/>
     </div>
-    <button type="submit" th:text="'sign in'">sign in</button>
+    <button type="submit" value="sign in">sign in</button>
 </form>
 <p th:if="${errors}" th:each = "err: ${errors}" th:text="${err.defaultMessage}">errors</p>
 <a th:href="@{/registration}" th:text="registration">registration</a>

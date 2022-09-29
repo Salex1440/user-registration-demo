@@ -38,6 +38,6 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User with nickname" + username + "doesn't exist!");
         }
-        return null;
+        return user;
     }
 }
